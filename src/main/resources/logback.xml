@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--引入默认配置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!--自定义环境变量-->
+    <property name="LOG_PATH" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}"/>
+    <property name="LOG_FILE"
+              value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} # %-5level # %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/demo.log</file>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>${LOG_PATH}/archived/demo-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- This is the kafkaAppender -->
+<!--    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} # %-5level # %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--        <topic>demo_kafka_logs</topic>-->
+<!--        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />-->
+<!--        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />-->
+
+<!--        &lt;!&ndash; Optional parameter to use a fixed partition &ndash;&gt;-->
+<!--        &lt;!&ndash; <partition>0</partition> &ndash;&gt;-->
+
+<!--        &lt;!&ndash; Optional parameter to include log timestamps into the kafka message &ndash;&gt;-->
+<!--        &lt;!&ndash; <appendTimestamp>true</appendTimestamp> &ndash;&gt;-->
+
+<!--        &lt;!&ndash; each <producerConfig> translates to regular kafka-client config (format: key=value) &ndash;&gt;-->
+<!--        &lt;!&ndash; producer configs are documented here: https://kafka.apache.org/documentation.html#newproducerconfigs &ndash;&gt;-->
+<!--        &lt;!&ndash; bootstrap.servers is the only mandatory producerConfig &ndash;&gt;-->
+<!--        <producerConfig>bootstrap.servers=kafka-dev-hb2.dian.so:9092</producerConfig>-->
+
+<!--        &lt;!&ndash; this is the fallback appender if kafka is not available. &ndash;&gt;-->
+<!--        <appender-ref ref="CONSOLE" />-->
+<!--    </appender>-->
+
+    <logger additivity="false" level="INFO" name="life_log">
+<!--        <appender-ref ref="kafkaAppender"/>-->
+        <appender-ref ref="console"/>
+    </logger>
+
+
+    <!-- LOG everything at INFO level -->
+    <root level="info">
+        <appender-ref ref="RollingFile"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

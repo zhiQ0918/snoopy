@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snoopy.dao.RequestLogDAO">
+
+    <insert id="insert" parameterType="com.example.snoopy.model.RequestLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `request_log`(`app_name`, `class_name`, `method_name`, `owner`, `exception`, `desc`, `retry_count`,
+        `alarm_type`, `alarm_status`, `status`, `http_method`, `http_url`, `http_param`, `http_result`, `create_time`,
+        `update_time`)
+        VALUES (#{appName}, #{className}, #{methodName}, #{owner}, #{exception}, #{desc}, #{retryCount}, #{alarmType},
+        #{alarmStatus}, #{status}, #{httpMethod}, #{httpUrl}, #{httpParam}, #{httpResult}, #{createTime},
+        #{updateTime});
+    </insert>
+
+    <select id="query" resultType="com.example.snoopy.model.RequestLog">
+        select * from request_log where retry_count > 0 and status = 0 and alarm_status = 1;
+    </select>
+
+    <update id="updateResult">
+        update request_log set status = 2,http_result=#{httpResult},update_time=now() where id = #{id}
+    </update>
+
+    <update id="updateAlarmResult">
+        update request_log set alarm_status = #{alarmStatus},update_time=now() where id = #{id}
+    </update>
+
+    <update id="updateLog">
+        update request_log set retry_count=#{retryCount},update_time=#{updateTime} where id =#{id}
+    </update>
+
+</mapper>
