@@ -14,7 +14,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Action {
 
+    private Long id;
     private String action;
     private String describe;
     private Boolean defaultCheck;
+
+    public Action(String action, String describe, Boolean defaultCheck) {
+        this.action = action;
+        this.describe = describe;
+        this.defaultCheck = defaultCheck;
+    }
 }

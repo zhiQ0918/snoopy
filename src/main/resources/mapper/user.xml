@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snoopy.dao.UserDAO">
+
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `user`(`name`, `username`, `password`, `avatar`, `status`, `telephone`, `last_login_ip`, `last_login_time`, `creator_id`, `create_time`, `merchant_code`, `deleted`, `role_id`)
+        VALUES (#{name}, #{username}, #{password}, #{avatar}, #{status}, #{telephone}, #{lastLoginIp}, #{lastLoginTime}, #{creatorId}, #{createTime}, #{merchantCode}, #{deleted}, #{roleId});
+    </insert>
+
+    <select id="getById" resultType="com.example.snoopy.model.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="queryUsers" resultType="com.example.snoopy.model.User">
+        select * from user limit 20;
+    </select>
+
+</mapper>

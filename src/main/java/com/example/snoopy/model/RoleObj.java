@@ -1,6 +1,7 @@
 package com.example.snoopy.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,8 +11,10 @@ import java.util.List;
  * @date 2020/10/15
  */
 @Data
+@NoArgsConstructor
 public class RoleObj {
-    private String id;
+    private Long id;
+    private String roleId;
     private String name;
     private String describe;
     private Integer status;

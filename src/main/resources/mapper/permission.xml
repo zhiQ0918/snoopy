@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snoopy.dao.PermissionDAO">
+
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `permission`(`role_id`, `permission_id`, `permission_name`, `action_ids`)
+        VALUES (#{roleId}, #{permissionId}, #{permissionName}, #{actionIds});
+    </insert>
+
+    <select id="getById" resultType="com.example.snoopy.model.Permission">
+        select * from permission where id = #{id}
+    </select>
+
+    <select id="getByRoleId" resultType="com.example.snoopy.model.Permission">
+        select * from permission where role_id = #{roleId}
+    </select>
+
+    <select id="queryPermissions" resultType="com.example.snoopy.model.Permission">
+        select * from permission limit 20;
+    </select>
+
+</mapper>

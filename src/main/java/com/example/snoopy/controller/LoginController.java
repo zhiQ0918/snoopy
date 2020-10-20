@@ -43,9 +43,13 @@ public class LoginController {
     }
 
 
+
+
+
+
     User getUser(){
         User user = new User();
-        user.setId("4291d7da9005377ec9aec4a71ea837f");
+        user.setId(1L);
         user.setName("麦可");
         user.setUsername("admin");
         user.setPassword("");
@@ -96,9 +100,78 @@ public class LoginController {
         permission3.setActionList(null);
         permission3.setDataAccess(null);
         permissionList.add(permission3);
+        Permission permission4 = new Permission();
+        permission4.setRoleId("admin");
+        permission4.setPermissionId("profile");
+        permission4.setPermissionName("详细页权限");
+        permission4.setActions(JSON.toJSONString(actionList));
+        permission4.setActionEntitySet(actionList);
+        permission4.setActionList(null);
+        permission4.setDataAccess(null);
+        permissionList.add(permission4);
+
+        Permission permission5 = new Permission();
+        permission5.setRoleId("admin");
+        permission5.setPermissionId("table");
+        permission5.setPermissionName("表格权限");
+        permission5.setActions(JSON.toJSONString(actionList));
+        permission5.setActionEntitySet(actionList);
+        permission5.setActionList(null);
+        permission5.setDataAccess(null);
+        permissionList.add(permission5);
+
+        Permission permission6 = new Permission();
+        permission6.setRoleId("admin");
+        permission6.setPermissionId("form");
+        permission6.setPermissionName("表单权限");
+        permission6.setActions(JSON.toJSONString(actionList));
+        permission6.setActionEntitySet(actionList);
+        permission6.setActionList(null);
+        permission6.setDataAccess(null);
+        permissionList.add(permission6);
+
+        Permission permission7 = new Permission();
+        permission7.setRoleId("admin");
+        permission7.setPermissionId("order");
+        permission7.setPermissionName("订单管理");
+        permission7.setActions(JSON.toJSONString(actionList));
+        permission7.setActionEntitySet(actionList);
+        permission7.setActionList(null);
+        permission7.setDataAccess(null);
+        permissionList.add(permission7);
+
+        Permission permission8 = new Permission();
+        permission8.setRoleId("admin");
+        permission8.setPermissionId("permission");
+        permission8.setPermissionName("权限管理");
+        permission8.setActions(JSON.toJSONString(actionList));
+        permission8.setActionEntitySet(actionList);
+        permission8.setActionList(null);
+        permission8.setDataAccess(null);
+        permissionList.add(permission8);
+
+        Permission permission9 = new Permission();
+        permission9.setRoleId("admin");
+        permission9.setPermissionId("role");
+        permission9.setPermissionName("角色管理");
+        permission9.setActions(JSON.toJSONString(actionList));
+        permission9.setActionEntitySet(actionList);
+        permission9.setActionList(null);
+        permission9.setDataAccess(null);
+        permissionList.add(permission9);
+
+        Permission permission10 = new Permission();
+        permission10.setRoleId("admin");
+        permission10.setPermissionId("user");
+        permission10.setPermissionName("用户管理");
+        permission10.setActions(JSON.toJSONString(actionList));
+        permission10.setActionEntitySet(actionList);
+        permission10.setActionList(null);
+        permission10.setDataAccess(null);
+        permissionList.add(permission10);
 
         RoleObj roleObj = new RoleObj();
-        roleObj.setId("admin");
+        roleObj.setRoleId("admin");
         roleObj.setName("管理员");
         roleObj.setDescribe("拥有所有权限");
         roleObj.setStatus(1);
@@ -106,6 +179,7 @@ public class LoginController {
         roleObj.setCreateTime(1497160610259L);
         roleObj.setDeleted(0);
         roleObj.setPermissions(permissionList);
+
 
         user.setRole(roleObj);
         return user;
