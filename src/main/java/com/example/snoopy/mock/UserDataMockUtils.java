@@ -7,10 +7,14 @@ import com.example.snoopy.model.RoleObj;
 import com.example.snoopy.vo.OrgTreeVO;
 import com.example.snoopy.vo.PermissionNoPager;
 import com.example.snoopy.vo.RoleVO;
+import com.example.snoopy.vo.ServerVO;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.RandomUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UserDataMockUtils {
 
@@ -98,6 +102,34 @@ public class UserDataMockUtils {
         t7.setChildren(Lists.newArrayList(t8, t9));
         return Lists.newArrayList(t7,t6);
     }
+
+    public static List<ServerVO> serverVOS(){
+        List<ServerVO> vos = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            ServerVO vo = new ServerVO();
+            vo.setKey(i);
+            vo.setId(i);
+            vo.setNo("no"+i);
+            vo.setDescription("这是一段描述");
+            vo.setCallNo(RandomUtils.nextInt(1,999));
+            vo.setStatus(RandomUtils.nextInt(0,3));
+            vo.setUpdatedAt(LocalDateTime.now());
+            vo.setEditable(true);
+            vos.add(vo);
+        }
+        return vos;
+    }
+
+    public static JSONObject getServerVOSWithPager(){
+        JSONObject object = new JSONObject();
+        object.put("data", serverVOS());
+        object.put("pageSize", 10);
+        object.put("pageNo", 0);
+        object.put("totalPage", 2);
+        object.put("totalCount", 15);
+        return object;
+    }
+
 
 
 }

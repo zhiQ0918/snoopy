@@ -15,13 +15,13 @@ import org.springframework.kafka.listener.ContainerProperties.AckMode;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
-@EnableKafka
+//@Configuration
+//@EnableKafka
 public class KafkaConfiguration {
 
     private String bootstrapServers = "kafka-dev-hb2.dian.so:9092";
 
-    @Bean
+//    @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> batchFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());

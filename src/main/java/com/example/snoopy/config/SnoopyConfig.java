@@ -31,8 +31,8 @@ public class SnoopyConfig implements InitializingBean, DisposableBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         config = this;
-        RetryThreadHelper.getInstance().start();
-        LogResolverThreadHelper.toStart();
+//        RetryThreadHelper.getInstance().start();
+//        LogResolverThreadHelper.toStart();
     }
 
     @Resource

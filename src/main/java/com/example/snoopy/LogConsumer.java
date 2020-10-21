@@ -21,7 +21,7 @@ public class LogConsumer {
     @Resource
     private EurekaClient eurekaClient;
 
-    @KafkaListener(topics = "demo_kafka_logs", groupId = "demo", containerFactory = "batchFactory")
+//    @KafkaListener(topics = "demo_kafka_logs", groupId = "demo", containerFactory = "batchFactory")
     public void consumer(List<String> records, Acknowledgment ack) throws SQLException {
         if (!CollectionUtils.isEmpty(records)) {
             // 线程池处理

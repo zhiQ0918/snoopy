@@ -77,24 +77,8 @@ public class UserController {
     }
 
     @GetMapping("/service")
-    public BizResult<User> getServiceList() {
-        User user = userDAO.getById(1L);
-        String roleId = user.getRoleId();
-
-        List<Permission> permissions = permissionDAO.getByRoleId(roleId);
-        for (Permission permission : permissions) {
-            String actionIds = permission.getActionIds();
-            List<Integer> actionIdList = JSON.parseArray(actionIds, Integer.class);
-            List<Action> actions = actionDAO.queryByIds(actionIdList);
-            permission.setActionEntitySet(actions);
-            permission.setActions(JSON.toJSONString(actions));
-        }
-        RoleObj roleObj = roleDAO.getByRoleId(roleId);
-        roleObj.setPermissions(permissions);
-
-        user.setRole(roleObj);
-
-        return BizResult.create(user);
+    public BizResult<JSONObject> getServiceList() {
+        return BizResult.create(UserDataMockUtils.getServerVOSWithPager());
     }
 
     @GetMapping("/user")

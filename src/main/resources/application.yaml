@@ -1,11 +1,11 @@
 application:
   name: demo
 server:
-  port: 8080
+  port: 8081
 
 eureka:
   client:
-    fetch-registry: true
+    fetch-registry: false
     register-with-eureka: false
     prefer-same-zone-eureka: true # 优先调用同一个zone的服务
     registry-fetch-interval-seconds: 5
@@ -18,8 +18,8 @@ spring:
   datasource:
     #   数据源基本配置
     username: root
-    password: Dian2018
-    url: jdbc:mysql://localhost:3306/transaction?characterEncoding=utf-8
+    password: nuchina
+    url: jdbc:mysql://localhost:3306/transaction?characterEncoding=utf-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
